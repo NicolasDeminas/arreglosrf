@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1> {% block title %} Arreglos Realizados {% endblock %} </h1>
+    {% if g.user %}
+        <a class='action' href="{{ url_for('arreglos.cargar1', id=equipos[0]) }}"> Nuevo Arreglo</a>
+        
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if g.user %}
+<h2> {{equipos [4]}} </h2>
+<table name="arreglos" id="arreglos">
+    <thead> 
+        <tr>
+            <th> Fecha </th>
+            <th> Proveedor </th>
+            <th> Monto </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for arreglo in arreglos %}
+        <tr>
+            <td>
+                {{ arreglo [1].strftime('%d/%m/%Y') }}
+            </td>   
+            <td>
+                {{ arreglo [3] }}
+            </td>
+            <td>
+                {{ arreglo [4] }}
+            </td>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
+{% block footer %}
+     <a href="{{ url_for('equipos.inicio') }}"> Volver </a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1> {% block title %} Nuevo Arreglo {% endblock %}  </h1>
+{% endblock %}
+
+{% block content %}
+
+
+<form method="POST">
+    <label> Fecha Arreglo: </label>
+    <input type="date" name='Fecha' />
+    <br />
+    <label> Proveedor</label>
+    <select name= 'Proveedor'>
+        <option> Arteaga </option>
+        <option> Van der Groeff </option>
+    </select>
+    <br />
+    <label> Importe (Opcional): </label>
+    <input type="number" name="Monto" />
+    <br />
+    <input type="submit" value="Aceptar"/>
+</form>
+
+{% endblock %}
+{% block footer %}
+     <a href="{{ url_for('equipos.inicio') }}"> Volver </a>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+    <h1> {% block title %} Equipos {% endblock %} </h1>
+    {% if g.user %}
+    <a class='action' href="{{ url_for('equipos.cargar') }}"> Nuevo Equipo</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if g.user %}
+    {% for equipo in equipos %}
+
+       <li> <a class='equipo' href="{{ url_for('arreglos.index', id=equipo[0])}}"> {{equipo[4]}} </a> </li>
+       
+    {% endfor %}
+{% endif %}
+{% endblock %}

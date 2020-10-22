@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<title> {% block title %}  {% endblock %} - Cargar Arreglos </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styl.css') }}" >
+
+
+<body>
+    <nav>
+        <h1> Arreglos R&F </h1>
+        <ul> 
+            {% if g.user %}
+            <li> <span> {{ g.user[1] }} </span> </li>
+            <li> <a href="{{ url_for('auth.logout') }}"> Cerrar Sesion </a></li>
+            {% else %}
+            <li><a href= "{{ url_for('auth.register') }}"  > Registrarse</a>  </li>
+            <li><a href= "{{ url_for('auth.login') }}"> Iniciar Sesion</a>  </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section class='content'>
+        <header>
+            {% block header %} {% endblock %}
+        </header>
+            {% for messege in get_flashed_messages() %}
+                <div class="flash"> {{ messege }} </div>
+            {% endfor %}
+            
+            {% block content %}  {% endblock %}
+            {% block footer %}  {% endblock %}
+    </section>
+</body>

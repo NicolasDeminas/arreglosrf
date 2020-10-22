@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block header %}
+    <h1> {% block title %} Agregar Equipo {% endblock %} </h1>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <Label> Codigo </Label>
+    <input name="Codigo" />
+    <br />
+    <label> Equipo </label>
+    <input name="Equipo" />
+    <br />
+    <label> Ubicacion </label>
+    <input name="Ubicacion" />
+    <br />
+    <input type="submit" value="Agregar" />
+</form>
+{% endblock %}
+{% block footer %}
+     <a href="{{ url_for('equipos.inicio') }}"> Volver </a>
+{% endblock %}
