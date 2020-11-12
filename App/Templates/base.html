@@ -10,6 +10,7 @@
             {% if g.user %}
             <li> <span> {{ g.user[1] }} </span> </li>
             <li> <a href="{{ url_for('auth.logout') }}"> Cerrar Sesion </a></li>
+            <li> <a href="{{ url_for('auth.update_password', id=g.user[0]) }}"> Cambiar contraseña </a></li>
             {% else %}
             <li><a href= "{{ url_for('auth.register') }}"  > Registrarse</a>  </li>
             <li><a href= "{{ url_for('auth.login') }}"> Iniciar Sesion</a>  </li>

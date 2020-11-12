@@ -10,6 +10,7 @@ def register():
     if request.method == "POST":
         username = request.form["Username"]
         password = request.form["password"]
+        password_confirm = request.form["password_confirm"]
         db, c = cnxn()
         error = None
         c.execute('Select id from Usuarios where Usuario = ?', username)
@@ -18,6 +19,10 @@ def register():
             error = 'Usuario requerido'
         if not password:
             error = 'Contraseña requerida'
+        if password == password_confirm:
+            pass
+        else:
+            error = 'Verifique que las contraseñas sean iguales'
         if consulta is not None:
             error = 'El usuario {} se encuentra registrado'.format(username)
         
@@ -54,6 +59,7 @@ def login():
     
     return render_template("auth/login.html")
 
+
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get("user_id")
@@ -77,3 +83,33 @@ def login_required(view):
 def logout():
     session.clear()
     return redirect(url_for('auth.login'))
+
+@bp.route("/<int:id>/update_password", methods=['GET', 'POST'])
+@login_required
+def update_password(id):
+    if request.method == "POST":
+        db, c = cnxn()
+        password_anterior = request.form['password_anterior']
+        password = request.form['password']
+        password_confirm = request.form['password_confirm']
+        c.execute('select * from Usuarios where id = ?', id)
+        current_password = c.fetchone()
+        error = None
+        
+
+        if not check_password_hash(current_password[2], password_anterior):
+            error = "La contraseña ingresada no coincide con su contraseña actual"
+        if password == password_anterior:
+            error = "Su nueva contraseña no puede ser igual a la anterior"
+        if password == password_confirm:
+            pass
+        else:
+            error = "Verifique que las contraseñas ingresadas sean iguales"
+        if error is None:
+            c.execute("update Usuarios set contraseña = ? where id = ?", generate_password_hash(password), id)
+            db.commit()
+            logout()
+            return redirect(url_for('auth.login'))
+        flash(error)
+    
+    return render_template('auth/update_password.html')
