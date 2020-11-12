@@ -25,8 +25,9 @@ def cargar1(id):
         Fecha = request.form['Fecha']
         Proveedor = request.form['Proveedor']
         Monto = request.form['Monto']
-        consulta = "Insert into Arreglos values (?, ?, ?, ?)"
-        values = (Fecha, id, Proveedor, Monto)
+        Descripcion = request.form['Descripcion']
+        consulta = "Insert into Arreglos values (?, ?, ?, ?, ?)"
+        values = (Fecha, id, Proveedor, Monto, Descripcion)
         c.execute(consulta, values)
         db.commit()
 

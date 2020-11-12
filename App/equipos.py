@@ -16,7 +16,7 @@ def inicio():
         c.execute("Select * from Equipos where local = 2 order by Ubicación")
         equipos = c.fetchall()
     elif g.user[3] == 3:
-        c.execute("Select * from Equipos")
+        c.execute("Select * from Equipos JOIN locales on equipos.local = locales.id order by locales.id")
         equipos = c.fetchall()
     else:
         c.execute("Select * from Equipos where local = 3")

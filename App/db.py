@@ -14,7 +14,7 @@ def cnxn():
     print ("conexion exitosa")
     return g.db, g.c
 
-# def get_db():
+# def cnxn():
 #     if 'db' not in g:
 #         g.db = pyodbc.connect(
 #             host=current_app.config['DATABASE_HOST'],

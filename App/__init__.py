@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -23,8 +24,15 @@ def create_app():
     app.register_blueprint(equipos.bp)
     app.register_blueprint(arreglos.bp)
 
+    @app.route("/")
+    def ruta():
+        return render_template("base.html")
+
     @app.route("/base")
     def base():
         return render_template("base.html")
 
     return app
+
+
+

@@ -2,7 +2,7 @@
 
 {% block header %}
     <h1> {% block title %} Arreglos Realizados {% endblock %} </h1>
-    {% if g.user %}
+    {% if g.user[0] == 1 or g.user[0] == 2 %}
         <a class='action' href="{{ url_for('arreglos.cargar1', id=equipos[0]) }}"> Nuevo Arreglo</a>
         
     {% endif %}
@@ -15,22 +15,27 @@
     <thead> 
         <tr>
             <th> Fecha </th>
+            <th> Descripción </th>
             <th> Proveedor </th>
             <th> Monto </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="arreglos"
         {% for arreglo in arreglos %}
         <tr>
             <td>
                 {{ arreglo [1].strftime('%d/%m/%Y') }}
             </td>   
             <td>
+                {{ arreglo [5] }}
+            </td>
+            <td>
                 {{ arreglo [3] }}
             </td>
             <td>
                 {{ arreglo [4] }}
             </td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>
