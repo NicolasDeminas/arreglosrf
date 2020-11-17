@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1> {% block title %} Pago {% endblock%} </h1>
+
+{% endblock %}
+
+{% block content %}
+    <form name="pagar" method="POST">
+        <label for="fecha"> Fecha </label>
+        <input type="date" name="fecha" id="fecha">
+        <br />
+        <label for="importe"> Importe </label>
+        <input type="number" name="importe" id="importe">
+        <br />
+        <label for="retIIBB">Retencion IIBB</label>
+        <input type="number" name="retIIBB" id="retIIBB" value="0">
+        <br />
+        <label for="retGcia">Retencion Ganancias</label>
+        <input type="number" name="retGcia" id="retGcia" value="0">
+        <br />
+        <label for="retIVA">Retencion IVA</label>
+        <input type="number" name="retIVA" id="retIVA" value="0">
+        <br />
+        <label for="retSUSS">Retencion SUSS</label>
+        <input type="number" name="retSUSS" id="retSUSS" value="0">
+        <br />
+        <label for="forma de pago">Forma de Pago</label>
+        <select name="forma de pago" >
+            <option> Transferencia </option>
+            <option> Cheque </option>
+            <option> Efectivo </option>
+            <option> Tarjeta </option>
+            <option> Delivery </option>
+        </select>
+        <br />
+        <input type="submit" value="Ingresar Pago">
+        
+    </form>
+{% endblock %}
+
+{% block footer %}
+     <a href="{{ url_for('pagos.comprobantes_emitidos', condicion1=0, condicion2=0) }}"> Volver </a>
+{% endblock %}

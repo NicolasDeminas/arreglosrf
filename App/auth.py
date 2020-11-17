@@ -53,7 +53,7 @@ def login():
         if error is None:
             session.clear()
             session["user_id"] = usuario[0]
-            return redirect(url_for("equipos.inicio"))
+            return redirect(url_for("base"))
         
         flash(error)
     

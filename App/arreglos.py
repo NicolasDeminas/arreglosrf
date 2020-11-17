@@ -21,6 +21,8 @@ def index(id):
 @login_required
 def cargar1(id):
     db, c = cnxn()
+    c.execute("Select * from Equipos where id=?", id)
+    equipos=c.fetchone()
     if request.method == 'POST':
         Fecha = request.form['Fecha']
         Proveedor = request.form['Proveedor']
@@ -33,5 +35,5 @@ def cargar1(id):
 
         return redirect(url_for('equipos.inicio'))
 
-    return render_template('arreglos/cargar1.html')
+    return render_template('arreglos/cargar1.html', equipo=equipos)
 

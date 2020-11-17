@@ -20,9 +20,11 @@ def create_app():
     from . import auth
     from . import equipos
     from . import arreglos
+    from . import pagos
     app.register_blueprint(auth.bp)
     app.register_blueprint(equipos.bp)
     app.register_blueprint(arreglos.bp)
+    app.register_blueprint(pagos.bp)
 
     @app.route("/")
     def ruta():

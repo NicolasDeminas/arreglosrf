@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1> {% block title %} Comprobantes Emitidos {% endblock%} </h1>
+<form name="pagados" id="pagados" method="POST">
+    <label for='pagados'> Pagados </label>
+    <select name="pagados">
+        <option > Todos </option>
+        <option > Pagados </option>
+        <option > No pagados </option>
+    </select>
+
+    <input type="submit" value="Filtrar" >
+</form>
+{% endblock %}
+
+{% block content %}
+    {% if g.user %}
+        <table name="comprobantes_emitidos" id="comprobantes_emitidos">
+            <thead> 
+                <tr>
+                    <th> Fecha </th>
+                    <th> Tipo </th>
+                    <th> Numero </th>
+                    <th> Cliente </th>
+                    <th> Monto </th>
+                    <th> Estado </th>
+                    <th> Forma de pago </th>
+                    <th> Fecha de pago </th>
+                    
+                    
+                </tr>
+            </thead>
+            <tbody id="comprobantes_emitidos"
+                {% for comp in comprobante %}
+                <tr>
+                    <td>
+                    {{ comp [0].strftime('%d/%m/%Y') }}
+                    </td>   
+                    <td>
+                    {{ comp [1] }}
+                    </td>
+                    <td>
+                    {{ comp [2] }}
+                    </td>
+                    <td>
+                    {{ comp [3] }}
+                    </td>
+                    <td>
+                    {{ comp [4] }}
+                    </td>
+                    {% if comp[6] == 0 %}
+                    <td>
+                        <a name=pagar href="{{ url_for('pagos.pago', id=comp[5])}}" > Pagar </a>
+                    </td>
+                    {% else %}
+                    <td>
+                        <label> Pagada </label>
+                    </td>
+                    <td>
+                        {{ comp [7] }}
+                    </td>
+                    <td>
+                        {{ comp [8].strftime('%d/%m/%Y') }}
+                    </td>
+                    
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}   
+{% endblock %}
+{% block footer %}
+     <a href="{{ url_for('base') }}"> Volver </a>
+{% endblock %}

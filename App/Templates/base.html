@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<title> {% block title %}  {% endblock %} - Cargar Arreglos </title>
+<title> {% block title %}  {% endblock %} </title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
 
 
 <body>
     <nav>
-        <h1> Arreglos R&F </h1>
+        <h1> Rock&Feller's </h1>
         <ul> 
             {% if g.user %}
             <li> <span> {{ g.user[1] }} </span> </li>
@@ -25,7 +25,11 @@
                 <div class="flash"> {{ messege }} </div>
             {% endfor %}
             
-            {% block content %}  {% endblock %}
+            {% block content %} 
+                <h1>MENU</h1> 
+                <li><a name=pagar href="{{ url_for('equipos.inicio')}}" > Equipos </a></li>
+                <li><a name=pagar href="{{ url_for('pagos.comprobantes_emitidos', condicion1=0, condicion2=0)}}" > Comprobantes Emitidos </a> </li> 
+            {% endblock %}
             {% block footer %}  {% endblock %}
     </section>
 </body>
